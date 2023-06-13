@@ -1,0 +1,115 @@
+body{
+    padding:20px;
+}
+
+.row1, .row2, .row3 {
+    border: 1px solid black;
+    padding: 10px;
+    background-color: whitesmoke
+}
+
+.row1{
+    height:500px;
+}
+
+.row2,.row3 {
+    height: 250px;
+}
+
+.modal-header {
+    background-color: #FFDE00;
+}
+
+.example {
+    background-color: hotpink;
+}
+
+#badgee {
+    width: 300px; /* Adjust the width as per your requirement */
+
+}
+
+.form-required::after {
+    content: "*";
+    color: red;
+}
+
+.badge.fire{
+    background-color:red;
+}
+
+.badge.dragon{
+    background-color:brown;
+}
+
+.badge.steel{
+    background-color:dimgrey;
+}
+
+.badge.ghost{
+    background-color:coral;
+}
+
+.badge.ground{
+    background-color: deeppink;
+}
+
+.badge.electric{
+    background-color:yellow;
+}
+
+.badge.psychic{
+    background-color: peru;
+}
+.badge.fairy{
+    background-color:hotpink;
+}
+
+.badge.ice{
+    background-color:cadetblue;
+}
+
+.badge.water {
+    background-color: aqua;
+}
+
+.badge.flying {
+    background-color: blueviolet;
+}
+
+.badge.normal {
+    background-color: orangered;
+}
+
+.badge.grass {
+    background-color: forestgreen;
+}
+
+.badge.bug {
+    background-color: greenyellow;
+}
+
+.badge.poison {
+    background-color: rebeccapurple;
+}
+
+#description{
+    font-size:10pt;
+    font-weight:bold;
+}
+
+.invalid-feedback {
+    display: none;
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input.is-invalid {
+    border-color: red;
+}
+
+    .input.is-invalid + .invalid-feedback {
+        display: block;
+    }

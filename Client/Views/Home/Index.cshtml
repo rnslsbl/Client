@@ -1,0 +1,441 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Latihan";
+}
+    <div class="container">
+        <div class="row">
+            <div class="row1 col-md-6">
+                <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi blanditiis necessitatibus rem? Tempore odit doloremque quibusdam eum dolore veniam iure reprehenderit omnis pariatur id quae aut esse harum, voluptates ullam.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="row2 col-md-12">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur vel explicabo dolor consequuntur ratione earum placeat dicta nam. Consequuntur quisquam vel nulla molestias quo ipsum provident quibusdam impedit sequi accusantium.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row3 col-md-12">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui autem repudiandae voluptatum deserunt a, atque aliquid obcaecati repellat doloribus quibusdam optio dolore eos distinctio? Necessitatibus, corrupti natus? Maxime, veritatis recusandae.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="d-flex" style="justify-content:space-between">
+    <button id="mOver" class="btn btn-primary">Mouse Over</button>
+    <button id="mOut" class="btn btn-primary">Mouse Out</button>
+    <button id="Click" class="btn btn-primary">Button Click</button>
+    </div>
+    <br/>
+    <hr />
+    <h1 style="text-align:center">LIST POKEMON</h1>
+    <div class="table-responsive">
+     <table class="table table-striped table-hover" id="myTable">
+       @*tble thead tr th*3*@
+       @*escape character string(\) kata setelahnya dianggap string*@
+
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="col-1 text-center">No</th>
+                <th scope="col">Name</th>
+                <th scope="col" text-center">Detail</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Exercise</th>
+            </tr>
+        </thead>
+        <tbody id="bodyPoke">
+        </tbody>
+    </table>
+
+    
+    <div class="modal fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exerciseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header example">
+                    <h5 class="modal-title" id="employeeModalLabel">Booking Room</h5>
+                </div>
+                <div class="modal-body" id="exerciseModalBody">
+                    <div class="container-fluid">
+                        <form class="row needs-validation" novalidate>
+                            <div class="col-md-12">
+                                <label class="form-required">Email </label>
+                                <input type="text" class="form-control" id="ex-email" name="ex-email" placeholder="Email" required/>
+                                <div class="valid-feedback">
+                                    Email Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid email.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-required">Employee ID </label>
+                                <input type="text" class="form-control" id="ex-uname" name="ex-uname" placeholder="Employee ID" required />
+                                <div class="valid-feedback">
+                                    Employee ID Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid ID.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-required">Password </label>
+                                <input type="password" class="form-control" id="ex-password" name="ex-password" placeholder="Password" required />
+                                <div class="valid-feedback">
+                                    Password Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid password.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-required">People </label>
+                                <input type="number" class="form-control" id="ex-people" name="ex-people" required />
+                                <div class="valid-feedback">
+                                    Number of People Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid number.
+                                </div>
+                            </div>
+
+                                <div class="col-md-12">
+                                <label class="form-required">Room </label>
+                                <select class="form-select" aria-label="Select Room" required>
+                                        <option value="1">Amsterdam</option>
+                                        <option value="2">Osaka</option>
+                                        <option value="3">Perth</option>
+                                    </select>
+                                </div>
+
+                            <div class="col-md-6">
+                                <label class="form-required">Start Date </label>
+                                <input type="date" class="form-control" id="ex-start-date" name="ex-start-date" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-required">End Date </label>
+                                <input type="date" class="form-control" id="ex-end-date" name="ex-end-date" required />
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label class="form-required">Remarks </label>
+                                <textarea class="form-control" id="remarks" rows="2" required></textarea>
+                                <div class="valid-feedback">
+                                    Remarks Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid remarks.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-required" required>Facility </label><br />
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    AC
+                                </label>
+                                </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Proyektor
+                                </label>
+                                </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Computer
+                                </label>
+                                </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    White Board
+                                </label>
+                            </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label class="form-required">Insert ID Card </label>
+                                <br/>
+                                <input type="file" class="form-control-file" id="input" required>
+                            </div> 
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeModalLabel">Add Employee</h5>
+                </div>
+                <div class="modal-body" id="employeeModalBody">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">NIK: </label>
+                                <input type="text" class="form-control" id="employee-nik" name="employee-nik" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">First Name: </label>
+                                <input type="text" class="form-control" id="employee-fname" name="employee-fname" required />
+                                <div class="valid-feedback">
+                                    First Name Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid first name.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name: </label>
+                                <input type="text" class="form-control" id="employee-lname" name="employee-lname" />
+                                <div class="valid-feedback">
+                                    Last Name Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid last name.
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Birthdate: </label>
+                                <input type="date" class="form-control" id="employee-bdate" name="employee-bdate" />
+                                <div class="valid-feedback">
+                                    Birthday Date Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid birthday date.
+                                </div>
+                            </div>
+                            <label class="form-label">Gender: </label>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="employee-gender" id="employee-gender-l">
+                                    <label class="form-check-label" for="employee-gender-l">
+                                        Laki-laki
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="employee-gender" id="employee-gender-p">
+                                    <label class="form-check-label" for="employee-gender-p">
+                                        Perempuan
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Hiring date: </label>
+                                <input type="date" class="form-control" id="employee-hdate" name="employee-hdate" />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Email: </label>
+                                <input type="email" class="form-control" id="employee-email" name="employee-email" />
+                                <div class="valid-feedback">
+                                    Email Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid Email.
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Phone number: </label>
+                                <input type="text" class="form-control" id="employee-pnumber" name="employee-pnumber" />
+                                <div class="valid-feedback">
+                                    Phone Number Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid phone number.
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Department ID: </label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option>Open this select menu</option>
+                                    <option value="1">ADD 1</option>
+                                    <option value="2">ADD 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pokeDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>The Detail of <span class="nama"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center align-items-center">
+                            
+                            
+                            <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img id="imgPoke" class="d-block w-100" src="" alt="">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img id="imgPoke2" class="d-block w-100 " src="" alt="">
+                                    </div>
+                                 </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#tabContent1">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#tabContent2">Stats</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3">
+                                <div class="tab-pane fade show active" id="tabContent1"> 
+                                    <h3 class="nama" style="font-weight: bold"></h3>
+                                    <p><span id="badgee"></span></p>
+                                    <p> <span id="description"> </span></p>
+                                    <p>Height: <span id="height"> </span></p>
+                                    <p>Weight: <span id="weight"></span></p>
+                                    <p>Base Experience: <span id="experience"></span></p>
+                                    <p>Abilities: <span id="ability"></span></p>                                 
+                                </div>                                                                 
+                                <div class="tab-pane fade" id="tabContent2">
+                                    <div class="column">
+                                        <div class="container-progress">
+                                            <!-- Kosong soalnya dah di buat pake ajax -->
+                                        </div>                                                          
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+@*
+    <!-- Modal -->
+    <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5>The Detail of <span class="nama"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img id="imgPoke" src="" alt="" width="250">                          
+                        </div>
+                        <div class="row">
+                            <img id="imgPoke" src="" alt="" width="250">
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <h3 class="nama" style="font-weight: bold"></h3>
+                                <p>Height : <span id="height"> </span></p>
+                                <p>Weight : <span id="weight"> </span></p>
+                                <p>Base Experience : <span id="experience"> </span></p>
+                            </div>
+
+                            <div class="row" id="badgee">
+                               
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+*@
+  
+
+
+
+
+@*<div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img id="imgPoke" src="" alt="" width="250" display:block>
+                        </div>
+                        <div class="col">
+                            <p class="nama" style="font-weight: bold"></p>
+                            <p>Height : <span id="height"> </span></p>
+                            <p>Weight : <span id="weight"> </span></p>
+                            <p>Base Experience : <span id="experience"> </span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex" id="badgee">
+                        </div>
+                        <div class="col">
+                            <p>kucing</p>
+                        </div>
+                    </div>
+                </div>*@
+
+
+@*   <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>HEADER</h1>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi blanditiis necessitatibus rem? Tempore odit doloremque quibusdam eum dolore veniam iure reprehenderit omnis pariatur id quae aut esse harum, voluptates ullam.</p>
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur vel explicabo dolor consequuntur ratione earum placeat dicta nam. Consequuntur quisquam vel nulla molestias quo ipsum provident quibusdam impedit sequi accusantium.</p>
+                </div>
+                <div class="row">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui autem repudiandae voluptatum deserunt a, atque aliquid obcaecati repellat doloribus quibusdam optio dolore eos distinctio? Necessitatibus, corrupti natus? Maxime, veritatis recusandae.</p>
+                </div>
+            </div>
+        </div>
+    </div>*@
