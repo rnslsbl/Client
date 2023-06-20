@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Latihan";
 }
-    <div class="container">
+    @*<div class="container">
         <div class="row">
             <div class="row1 col-md-6">
                 <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi blanditiis necessitatibus rem? Tempore odit doloremque quibusdam eum dolore veniam iure reprehenderit omnis pariatur id quae aut esse harum, voluptates ullam.</p>
@@ -26,30 +26,252 @@
     <button id="mOver" class="btn btn-primary">Mouse Over</button>
     <button id="mOut" class="btn btn-primary">Mouse Out</button>
     <button id="Click" class="btn btn-primary">Button Click</button>
-    </div>
+    </div>*@
     <br/>
-    <hr />
-    <h1 style="text-align:center">LIST POKEMON</h1>
-    <div class="table-responsive">
-     <table class="table table-striped table-hover" id="myTable">
-       @*tble thead tr th*3*@
-       @*escape character string(\) kata setelahnya dianggap string*@
+    @*<hr />*@
+    <h1 style="text-align:center">LIST EMPLOYEE</h1>
+    <br/>
 
+    <div class="table-responsive">
+    <button type="button" class="btn btn-outline-success my-3" data-bs-toggle="modal" data-bs-target="#employeeModal" onclick="AddEmployee()">Insert</button>
+
+
+     <table class="table table-striped table-hover" id="Employee">
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="col-1 text-center">No</th>
-                <th scope="col">Name</th>
-                <th scope="col" text-center">Detail</th>
-                <th scope="col">Employee</th>
-                <th scope="col">Exercise</th>
+                <th>No.</th>
+                <th>Guid</th>
+                <th>Nik</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>Gender</th>
+                <th>Hiring Date</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="bodyPoke">
         </tbody>
     </table>
 
+    <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeModalTitle">Add Employee</h5>
+            </div>
+            <div class="modal-body" id="employeeModalBody">
+                <div class="container-fluid">
+                        <form class="row" onsubmit="AddEmployee()">
+                        <div class="col-md-12">
+                            <label class="form-label ">NIK</label>
+                            <input type="text" class="form-control" id="employee-nik" name="employee-nik" required />
+                                <div class="valid-feedback">
+                                    NIK Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid NIK.
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label ">First Name</label>
+                            <input type="text" class="form-control" id="employee-fname" name="employee-fname" required />
+                            <div class="valid-feedback">
+                                First Name Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid first name.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label ">Last Name</label>
+                            <input type="text" class="form-control" id="employee-lname" name="employee-lname" required />
+                                <div class="valid-feedback">
+                                    Last Name Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid last name.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Birthdate</label>
+                            <input type="date" class="form-control" id="employee-bdate" name="employee-bdate" />
+                                <div class="valid-feedback">
+                                    Birthday Date Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid date.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Gender</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="employee-gender" id="employee-gender-m">
+                                <label class="form-check-label text" for="employee-gender-m">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="employee-gender" id="employee-gender-f">
+                                <label class="form-check-label " for="employee-gender-f">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Hiring Date</label>
+                                <input type="date" class="form-control" id="employee-hdate" name="employee-hdate" required />
+                            <div class="valid-feedback">
+                                    Birthday Date Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid date.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Email</label>
+                            <input type="email" class="form-control" id="employee-email" name="employee-email" required />
+                                <div class="valid-feedback">
+                                    Email Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid email.
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Phone Number</label>
+                            <input type="text" class="form-control" id="employee-pnumber" name="employee-pnumber" required />
+                                <div class="valid-feedback">
+                                    Phone Number Valid
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please input a valid number.
+                                </div>
+                            <br />
+                        </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateEmployeeModalTitle">Update Employee</h5>
+            </div>
+            <div class="modal-body" id="updateEmployeeModalBody">
+                <div class="container-fluid">
+                    <form class="row" onsubmit="updateEmployee()">
+                        <div class="col-md-12">
+                            <label class="form-label ">NIK</label>
+                            <input type="text" class="form-control" id="update-employee-nik" name="update-employee-nik" readonly />
+                            <div class="valid-feedback">
+                                NIK Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid NIK.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label ">First Name</label>
+                            <input type="text" class="form-control" id="update-employee-fname" name="update-employee-fname" required />
+                            <div class="valid-feedback">
+                                First Name Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid first name.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label ">Last Name</label>
+                            <input type="text" class="form-control" id="update-employee-lname" name="update-employee-lname" required />
+                            <div class="valid-feedback">
+                                Last Name Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid last name.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Birthdate</label>
+                            <input type="date" class="form-control" id="update-employee-bdate" name="update-employee-bdate" />
+                            <div class="valid-feedback">
+                                Birthday Date Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid date.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Gender</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="update-employee-gender" id="update-employee-gender-m">
+                                <label class="form-check-label text" for="update-employee-gender-m">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="update-employee-gender" id="update-employee-gender-f">
+                                <label class="form-check-label " for="update-employee-gender-f">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Hiring Date</label>
+                            <input type="date" class="form-control" id="update-employee-hdate" name="update-employee-hdate" required />
+                            <div class="valid-feedback">
+                                Birthday Date Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid date.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Email</label>
+                            <input type="email" class="form-control" id="update-employee-email" name="upadte-employee-email" required />
+                            <div class="valid-feedback">
+                                Email Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid email.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label ">Phone Number</label>
+                            <input type="text" class="form-control" id="update-employee-pnumber" name="update-employee-pnumber" required />
+                            <div class="valid-feedback">
+                                Phone Number Valid
+                            </div>
+                            <div class="invalid-feedback">
+                                Please input a valid number.
+                            </div>
+                            <br />
+                        </div>
+                        <div class="modal-footer">
+                            @*<input class="btn btn-primary" type="submit" value="submit">*@
+                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     
-    <div class="modal fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exerciseModalLabel" aria-hidden="true">
+@*    <div class="modal fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exerciseModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header example">
@@ -349,7 +571,7 @@
         </div>
     </div>
     </div>
-    </div>
+    </div>*@
 
 @*
     <!-- Modal -->

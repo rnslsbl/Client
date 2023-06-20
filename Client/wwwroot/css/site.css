@@ -17,7 +17,9 @@ body{
 }
 
 .modal-header {
-    background-color: #FFDE00;
+    background-color: black;
+    font-weight:bold;
+    color:white;
 }
 
 .example {

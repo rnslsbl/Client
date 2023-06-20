@@ -1,11 +1,7 @@
+C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.exe
 C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\appsettings.json
 C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.staticwebassets.runtime.json
-C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.exe
-C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.deps.json
-C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.runtimeconfig.json
-C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.dll
-C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.pdb
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
@@ -27,5 +23,9 @@ C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\scopedcss\projectbundl
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.dll
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\refint\Client.dll
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.pdb
+C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.deps.json
+C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.dll
+C:\Users\USER\source\repos\Client\Client\bin\Debug\net6.0\Client.pdb
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
 C:\Users\USER\source\repos\Client\Client\obj\Debug\net6.0\ref\Client.dll

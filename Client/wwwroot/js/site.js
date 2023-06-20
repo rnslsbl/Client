@@ -1,4 +1,4 @@
-﻿let mouseOverBtn = document.getElementById('mOver');
+﻿/*let mouseOverBtn = document.getElementById('mOver');
 let mouseOutBtn = document.getElementById('mOut');
 let clickBtn = document.getElementById('Click');
 let row1 = document.querySelector('.row1');
@@ -40,8 +40,8 @@ animals.forEach(animal => {
 console.log(animals);
 
 //cara2
-/*const onlyMouse = animals.filter(animals => animals.species != "mouse");
-console.log(onlyMouse);*/
+*//*const onlyMouse = animals.filter(animals => animals.species != "mouse");
+console.log(onlyMouse);*//*
 
 //pelajari .map
 const ubah = animals.map(x => {
@@ -62,8 +62,7 @@ animals.forEach(animal => {
 });
 
 console.log(onlyMouse);
-
-
+*/
 /*$.ajax({
     url: "https://swapi.dev/api/people/"
 }).done((result) => {
@@ -101,11 +100,7 @@ $.each(result.results, (key, val) => {
 })*/
 
 $(document).ready(function () {
-    let table = $("#myTable").DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
+    $('#Employee').DataTable({
         ajax: {
             url: "https://localhost:7023/api/Employee",
             dataSrc: "data",
@@ -118,135 +113,297 @@ $(document).ready(function () {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
-            { data: "name" },
+            { data: "guid" },
+            { data: "nik" },
+            { data: "firstName" },
+            { data: "lastName" },
+            { data: "birthDate" },
             {
-                data: "url",
-                render: function (data, type, row) {
-                    return `<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#pokeDetail" onclick="detail('${data}')">Detail</button>`;
+                data: "gender",
+                render: function (data) {
+                    return data === 0 ? "Female" : "Male";
                 }
             },
+            { data: "hiringDate" },
+            { data: "email" },
+            { data: "phoneNumber" },
             {
-                render: function (data, type, row) {
-                    return `<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#employeeModal" onclick="openAddEmpModal()">Add</button>`;               
-            }
-            },
-            {
-                render: function (data, type, row) {
-                    return `<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exerciseModal" onclick="openExercise()">Add</button>`;
+                render: function (data, type, row, meta) {
+                    return `
+                    <button type="button" class="btn btn-outline-dark" id="updateBtn-${row.guid}" data-bs-toggle="modal" data-bs-target="#updateEmployee" onclick="openUpdateEmpModal('${row.guid}','${row.nik}', '${row.firstName}', '${row.lastName}', '${row.birthDate}', ${row.gender}, '${row.hiringDate}', '${row.email}', '${row.phoneNumber}')">Update</button> 
+                    <button type="button" class="btn btn-outline-dark" onclick="deleteEmployee('${row.guid}')">Delete</button>`
+                        ;
                 }
             }
         ]
     });
 });
 
+
+// Function to open the update modal and pre-fill the form with employee data
+    function openUpdateEmpModal(guid, nik, firstName, lastName, birthDate, gender, hiringDate, email, phoneNumber) {
+        // Set the values in the modal form
+        document.getElementById('update-employee-nik').value = nik;
+        document.getElementById('update-employee-fname').value = firstName;
+        document.getElementById('update-employee-lname').value = lastName;
+        document.getElementById('update-employee-bdate').value = birthDate;
+        document.getElementById('update-employee-hdate').value = hiringDate;
+        document.getElementById('update-employee-email').value = email;
+        document.getElementById('update-employee-pnumber').value = phoneNumber;
+
+        console.log(gender)
+        // Set the gender radio button
+        if (gender === 0) {
+            document.getElementById('update-employee-gender-f').checked = true;
+        } else {
+            document.getElementById('update-employee-gender-m').checked = true;
+        }
+
+        // Change the modal title and button text
+        document.getElementById('updateEmployeeModalTitle').innerText = 'Update Employee';
+        $('#updateEmployee').modal('show');
+
+        document.getElementById('updateEmployeeModalBody').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            updateEmployee(guid);
+        });
+    }
+
+    function updateEmployee(guid) {
+        console.log('this guid: ', guid)
+        // Retrieve the updated values from the input fields
+        var eNik = document.getElementById('update-employee-nik').value;
+        var eFirst = document.getElementById('update-employee-fname').value;
+        var eLast = document.getElementById('update-employee-lname').value;
+        var eBDate = document.getElementById('update-employee-bdate').value;
+        var eGender = document.querySelector('input[name="update-employee-gender"]:checked').id.includes('f') ? 0 : 1;
+        var eHDate = document.getElementById('update-employee-hdate').value;
+        var eEmail = document.getElementById('update-employee-email').value;
+        var ePhone = document.getElementById('update-employee-pnumber').value;
+
+        $.ajax({
+            url: `https://localhost:7023/api/Employee`,
+            method: "PUT",
+            data: JSON.stringify({
+                '__metadata': {
+                    'type': 'SP.Data.EmployeeListItem'
+                },
+                'guid': guid,
+                'nik': eNik,
+                'firstName': eFirst,
+                'lastName': eLast,
+                'birthDate': eBDate,
+                'gender': eGender,
+                'hiringDate': eHDate,
+                'email': eEmail,
+                'phoneNumber': ePhone
+            }),
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "content-type": "application/json;odata=verbose",
+                "X-HTTP-Method": "MERGE",
+                "IF-MATCH": "*"
+            },
+            success: function (data) {
+                console.log(data);
+                window.location.reload()
+                var updatedRowData = [
+                    eNik,
+                    eFirst,
+                    eLast,
+                    eBDate,
+                    eGender === 0 ? 'Female' : 'Male',
+                    eHDate,
+                    eEmail,
+                    ePhone
+                ];
+                dataTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var rowData = this.data();
+                    if (rowData[0] === guid) {
+                        this.data(updatedRowData);
+                        this.invalidate();
+                        return false;
+                    }
+                });
+                $('#updateEmployee').modal('hide');
+            },
+            error: function (error) {
+                console.log("Error: " + JSON.stringify(error));
+            }
+        });
+    }
+
+
+function AddEmployee() {
+    var eNik = $('#employee-nik').val();
+    var eFirst = $('#employee-fname').val();
+    var eLast = $('#employee-lname').val();
+    var eBDate = $('#employee-bdate').val();
+    var eGender = $('#employee-gender').val();
+    var eHDate = $('#employee-hdate').val();
+    var eEmail = $('#employee-email').val();
+    var ePhone = $('#employee-pnumber').val();
+
+    $.ajax({
+        async: true, // Async by default is set to “true” load the script asynchronously  
+        // URL to post data into sharepoint list  
+        url: "https://localhost:7023/api/Employee",
+        method: "POST", //Specifies the operation to create the list item  
+        data: JSON.stringify({
+            '__metadata': {
+                'type': 'SP.Data.EmployeeListItem' // it defines the ListEnitityTypeName  
+            },
+            //Pass the parameters
+            'nik': eNik,
+            'firstName': eFirst,
+            'lastName': eLast,
+            'birthDate': eBDate,
+            'gender': eGender,
+            'hiringDate': eHDate,
+            'email': eEmail,
+            'phoneNumber': ePhone
+        }),
+        headers: {
+            "accept": "application/json;odata=verbose", //It defines the Data format   
+            "content-type": "application/json;odata=verbose", //It defines the content type as JSON  
+/*            "X-RequestDigest": $("#__REQUESTDIGEST").val() //It gets the digest value   
+*/        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.log(JSON.stringify(error));
+
+        }
+    })
+}
+
+function deleteEmployee(guid) {
+    console.log(guid)
+    if (confirm("Are you sure you want to delete this employee?")) {
+        $.ajax({
+            url: `https://localhost:7023/api/Employee/${guid}`,
+            type: 'DELETE',
+            success: function (result) {
+                console.log(result);
+                window.location.reload();
+            }, error: function (xhr, status, error) {
+                console.error('error occured: ', error)
+            }
+        });
+    }
+}
+
+
 function openAddEmpModal() {
     $("#employeeModal").modal("show");
 }
 
-function openExercise() {
+/*function openExercise() {
     $("#latihan").modal("show");
 }
 
 function removeBar() {
     $(".container-progress").empty();
 }
-function detail(stringUrl) {
-    $.ajax({
-        url: stringUrl,
-    }).done(res => {
-        console.log(res);
-        $(".nama").html(res.name)
-        $("#imgPoke").attr("src", res.sprites.other['official-artwork'].front_default)
-        $("#imgPoke2").attr("src", res.sprites.other['official-artwork'].front_shiny)
-
-        $("#height").html(res.height)
-        $("#weight").html(res.weight)
-        $("#experience").html(res.base_experience)
-
-
+    function detail(stringUrl) {
         $.ajax({
-            url: res.species.url
-        }).done((species) => {
-            const description = species.flavor_text_entries.find(entry => entry.language.name === "en");
-            $("#description").text(description.flavor_text);
-        }).fail((error) => {
-            console.log(error);
-        });
+            url: stringUrl,
+        }).done(res => {
+            console.log(res);
+            $(".nama").html(res.name)
+            $("#imgPoke").attr("src", res.sprites.other['official-artwork'].front_default)
+            $("#imgPoke2").attr("src", res.sprites.other['official-artwork'].front_shiny)
 
-        let abilitiesList = '<ul>';
-        res.abilities.forEach(ability => {
-            abilitiesList += `<li>${ability.ability.name}</li>`;
-        });
-        abilitiesList += '</ul>';
-        $("#ability").html(abilitiesList);
+            $("#height").html(res.height)
+            $("#weight").html(res.weight)
+            $("#experience").html(res.base_experience)
 
 
-        let temp = "";
-        $.each(res.types, (key, val) => {
-            const type = val.type.name;
-             const badgeSize = "badge-width-1500px";
-            temp += `<span class="badge ${type} ${badgeSize}">${type}</span> `;
-        });
-        $("#badgee").html(temp);
+            $.ajax({
+                url: res.species.url
+            }).done((species) => {
+                const description = species.flavor_text_entries.find(entry => entry.language.name === "en");
+                $("#description").text(description.flavor_text);
+            }).fail((error) => {
+                console.log(error);
+            });
 
-        const baseStats = res.stats;
-    console.log(baseStats);
+            let abilitiesList = '<ul>';
+            res.abilities.forEach(ability => {
+                abilitiesList += `<li>${ability.ability.name}</li>`;
+            });
+            abilitiesList += '</ul>';
+            $("#ability").html(abilitiesList);
 
-    const hp = baseStats[0].base_stat;
-    const attack = baseStats[1].base_stat;
-    const defense = baseStats[2].base_stat;
-    const spattack = baseStats[3].base_stat;
-    const spdefense = baseStats[4].base_stat;
-    const speed = baseStats[5].base_stat;
 
-    console.log("HP: ", hp);
-    console.log("Attack: ", attack);
-    console.log("Defense: ", defense);
-    console.log("Special Attack: ", spattack);
-    console.log("Special Defense: ", spdefense);
-    console.log("Speed: ", speed);
+            let temp = "";
+            $.each(res.types, (key, val) => {
+                const type = val.type.name;
+                const badgeSize = "badge-width-1500px";
+                temp += `<span class="badge ${type} ${badgeSize}">${type}</span> `;
+            });
+            $("#badgee").html(temp);
 
-    const progressBar = [
-        { name: "Hp", stat: baseStats[0].base_stat },
-        { name: "Attack", stat: baseStats[1].base_stat },
-        { name: "Defense", stat: baseStats[2].base_stat },
-        { name: "Special Attack", stat: baseStats[3].base_stat },
-        { name: "Special Defense", stat: baseStats[4].base_stat },
-        { name: "Speed", stat: baseStats[5].base_stat },
+            const baseStats = res.stats;
+            console.log(baseStats);
 
-    ];
-        $(".container-progress").empty();
+            const hp = baseStats[0].base_stat;
+            const attack = baseStats[1].base_stat;
+            const defense = baseStats[2].base_stat;
+            const spattack = baseStats[3].base_stat;
+            const spdefense = baseStats[4].base_stat;
+            const speed = baseStats[5].base_stat;
 
-    $.each(progressBar, function (index, progressBar) {
-        var progress = $("<div>").addClass("progress mx-auto mb-3");
-        var progressBarInner = $("<div>")
-            .addClass("progress-bar")
-            .attr({
-                role: "progressbar",
-                style: "width: " + progressBar.stat + "%; background-color: " + getProgressBarColor(progressBar.stat),
-                "aria-valuenow": progressBar.stat,
-                "aria-valuemin": "0",
-                "aria-valuemax": "200"
-            })
-            .text(progressBar.name + ": " + progressBar.stat);
-        progress.append(progressBarInner);
-        $(".container-progress").append(progress);
+            console.log("HP: ", hp);
+            console.log("Attack: ", attack);
+            console.log("Defense: ", defense);
+            console.log("Special Attack: ", spattack);
+            console.log("Special Defense: ", spdefense);
+            console.log("Speed: ", speed);
 
-    });
-    })
-       
-    function getProgressBarColor(stat) {
-        if (stat >= 70) {
-            return "green"; // High stat, green color
-        } else if (stat >= 40) {
-            return "orange"; // Medium stat, orange color
-        } else {
-            return "red"; // Low stat, red color
+            const progressBar = [
+                { name: "Hp", stat: baseStats[0].base_stat },
+                { name: "Attack", stat: baseStats[1].base_stat },
+                { name: "Defense", stat: baseStats[2].base_stat },
+                { name: "Special Attack", stat: baseStats[3].base_stat },
+                { name: "Special Defense", stat: baseStats[4].base_stat },
+                { name: "Speed", stat: baseStats[5].base_stat },
+
+            ];
+            $(".container-progress").empty();
+
+            $.each(progressBar, function (index, progressBar) {
+                var progress = $("<div>").addClass("progress mx-auto mb-3");
+                var progressBarInner = $("<div>")
+                    .addClass("progress-bar")
+                    .attr({
+                        role: "progressbar",
+                        style: "width: " + progressBar.stat + "%; background-color: " + getProgressBarColor(progressBar.stat),
+                        "aria-valuenow": progressBar.stat,
+                        "aria-valuemin": "0",
+                        "aria-valuemax": "200"
+                    })
+                    .text(progressBar.name + ": " + progressBar.stat);
+                progress.append(progressBarInner);
+                $(".container-progress").append(progress);
+
+            });
+        })
+
+        function getProgressBarColor(stat) {
+            if (stat >= 70) {
+                return "green"; // High stat, green color
+            } else if (stat >= 40) {
+                return "orange"; // Medium stat, orange color
+            } else {
+                return "red"; // Low stat, red color
+            }
         }
-    }
-
-   
 }
+*/
+
+
 
 (function () {
     'use strict'
